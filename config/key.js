@@ -1,3 +1,4 @@
 module.exports = {
-  mongoURI: "mongodb://localhost:27017/atracker"
+  mongoURI: "mongodb://localhost:27017/atracker",
+  secretkey: "swulutions"
 };
