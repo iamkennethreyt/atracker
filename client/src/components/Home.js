@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Home extends Component {
   render() {
@@ -8,6 +9,11 @@ class Home extends Component {
     return (
       <div className="container">
         <h1>{isAuthenticated ? user.name : "Welcome to my login app"}</h1>
+        {isAuthenticated ? (
+          <Link to="/accountsettings" className="btn purple text-white my-4">
+            Change Password
+          </Link>
+        ) : null}
       </div>
     );
   }

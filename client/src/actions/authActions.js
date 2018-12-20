@@ -18,7 +18,7 @@ export const registerUser = (userdata, history) => dispatch => {
 };
 
 //Login User
-export const loginUser = (userdata, history) => dispatch => {
+export const loginUser = userdata => dispatch => {
   axios
     .post("/api/users/login", userdata)
     .then(res => {
@@ -37,6 +37,20 @@ export const loginUser = (userdata, history) => dispatch => {
       //set current user
       dispatch(setCurrentUser(decoded));
     })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+//Change password
+export const changePassword = (userdata, history) => dispatch => {
+  axios
+    .post("/api/users/accountsettings", userdata)
+    .then(() => history.push("/"))
+    .then(() => alert("SUCCESSFULLY CHANGED THE PASSWORD"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Register from "./components/Register";
 import Navbar from "./components/Navbar";
+import AccountSettings from "./components/AccountSettings";
 
 //check for token
 if (localStorage.jwtToken) {
@@ -44,6 +45,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/accountsettings" component={AccountSettings} />
           </div>
         </Router>
       </Provider>
