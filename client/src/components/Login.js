@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import { connect } from "react-redux";
 import classnames from "classnames";
 import { loginUser } from "../actions/authActions";
@@ -80,7 +81,7 @@ class Login extends Component {
             {errors.password && (
               <div className="invalid-feedback">{errors.password}</div>
             )}
-            <button className="btn btn-info btn-block my-4" type="submit">
+            <button className="btn purple btn-block my-4" type="submit">
               Sign in
             </button>
           </form>

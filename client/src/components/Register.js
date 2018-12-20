@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
@@ -109,7 +110,7 @@ class Register extends Component {
             {errors.password2 && (
               <div className="invalid-feedback">{errors.password2}</div>
             )}
-            <button className="btn btn-info btn-block my-4" type="submit">
+            <button className="btn purple btn-block my-4" type="submit">
               Sign up
             </button>
           </form>

@@ -38,7 +38,7 @@ class Navbar extends Component {
     );
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark primary-color mb-3">
+      <nav className="navbar navbar-expand-lg navbar-dark purple mb-3">
         <div className="container">
           <Link className="nav-brand text-white" to="/">
             aTracker
