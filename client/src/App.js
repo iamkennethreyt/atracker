@@ -7,11 +7,11 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 
-import Login from "./components/Login";
-import Home from "./components/Home";
-import Register from "./components/Register";
-import Navbar from "./components/Navbar";
-import AccountSettings from "./components/AccountSettings";
+import DashboardPage from "./components/DashboardPage/DashboardPage";
+import LoginPage from "./components/LoginPage/LoginPage";
+import AboutPage from "./components/AboutPage/AboutPage";
+import TeachersPage from "./components/TeachersPage/TeachersPage";
+import AddTeachersPage from "./components/TeachersPage/AddTeachersPage";
 
 //check for token
 if (localStorage.jwtToken) {
@@ -41,11 +41,11 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div>
-            <Navbar />
-            <Route exact path="/" component={Home} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/accountsettings" component={AccountSettings} />
+            <Route exact path="/" component={DashboardPage} />
+            <Route exact path="/login" component={LoginPage} />
+            <Route exact path="/about" component={AboutPage} />
+            <Route exact path="/teachers" component={TeachersPage} />
+            <Route exact path="/teachers/add" component={AddTeachersPage} />
           </div>
         </Router>
       </Provider>

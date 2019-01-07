@@ -4,23 +4,10 @@ import jwt_decode from "jwt-decode";
 
 import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 
-//Register User
-export const registerUser = (userdata, history) => dispatch => {
-  axios
-    .post("/api/users/register", userdata)
-    .then(res => history.push("/login"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
 //Login User
 export const loginUser = userdata => dispatch => {
   axios
-    .post("/api/users/login", userdata)
+    .post("/api/teachers/login", userdata)
     .then(res => {
       //save to local storage
       const { token } = res.data;
@@ -68,10 +55,9 @@ export const setCurrentUser = decoded => {
 };
 
 //logout user
-export const logoutUser = () => dispatch => {
+export const logoutUser = history => dispatch => {
   //remove token from localstorage
   localStorage.removeItem("jwtToken");
-
   //remove auth header for future requests
   setAuthToken(false);
 
