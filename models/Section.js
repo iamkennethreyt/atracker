@@ -3,19 +3,19 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //create schema
-const UserSchema = new Schema({
+const SectionSchema = new Schema({
   name: {
     type: String,
     required: true
   },
-  username: {
+  yearlevel: {
     type: String,
     required: true
   },
-  password: {
-    type: String,
-    required: true
+  date: {
+    type: Date,
+    default: Date.now
   }
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = Seksyon = mongoose.model("sections", SectionSchema);

@@ -1,12 +1,12 @@
 const validator = require("validator");
-const isEmpty = require("./isEmpty");
+const _ = require("lodash");
 
-module.exports = function validateAccountSettingsInput(data) {
+module.exports = function validateChangePasswordInput(data) {
   let errors = {};
 
-  data.password = !isEmpty(data.password) ? data.password : "";
-  data.password2 = !isEmpty(data.password2) ? data.password2 : "";
-  data.password3 = !isEmpty(data.password3) ? data.password3 : "";
+  data.password = !_.isEmpty(data.password) ? data.password : "";
+  data.password2 = !_.isEmpty(data.password2) ? data.password2 : "";
+  data.password3 = !_.isEmpty(data.password3) ? data.password3 : "";
 
   if (!validator.equals(data.password2, data.password3)) {
     errors.password3 = "Confirm password must match";
@@ -34,6 +34,6 @@ module.exports = function validateAccountSettingsInput(data) {
 
   return {
     errors,
-    isValid: isEmpty(errors)
+    isValid: _.isEmpty(errors)
   };
 };
