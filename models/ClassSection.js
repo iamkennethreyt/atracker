@@ -28,7 +28,15 @@ const ClassSectionSchema = new Schema({
       student: {
         type: Schema.Types.ObjectId,
         ref: "students"
-      }
+      },
+      attendances: [
+        {
+          date: {
+            type: Date,
+            default: Date.now
+          }
+        }
+      ]
     }
   ],
   date: {

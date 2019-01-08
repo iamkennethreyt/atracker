@@ -112,11 +112,22 @@ router.post(
   }
 );
 
+//@route    GET api/users/current
+//@desc     return current user
+//@access   private
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json(req.user);
+  }
+);
+
 //@route    PUT api/teachers/changepassword/:id
 //@desc     account settings change password
 //@access   private
 router.put(
-  "/changepassword/:id",
+  "/accountsettings/password",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = ValidateChangePasswordInput(req.body);
@@ -126,11 +137,6 @@ router.put(
       return res.status(400).json(errors);
     }
 
-    if (req.user.id !== req.params.id) {
-      return res
-        .status(400)
-        .json({ Unauthorized: "You are Unauthorized to Register new teacher" });
-    }
     //check password
     bcrypt.compare(req.body.password, req.user.password).then(isMatch => {
       if (isMatch) {
@@ -160,7 +166,7 @@ router.put(
 );
 
 //@route    GET api/teachers/
-//@desc     Show all teacher based on the params id
+//@desc     Show all registered teachers
 //@access   private
 router.get(
   "/",
