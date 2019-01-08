@@ -89,7 +89,7 @@ router.get(
   }
 );
 
-//@route    GET api/students/:id
+//@route    GET api/classsections/:id
 //@desc     Show single student based on the params id
 //@access   private
 router.get(
@@ -112,6 +112,49 @@ router.get(
       .catch(err =>
         res.status(404).json({ profile: "There is no class for this params" })
       );
+  }
+);
+
+//@route    POST /api/classsections/register/:id
+//@desc     Register new student in classsection
+//@access   public
+router.put(
+  "/register/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    if (req.user.usertype === "teacher") {
+      return res
+        .status(400)
+        .json({ error: "You are Unauthorized to Register new section" });
+    }
+
+    if (!req.body.student) {
+      return res.status(400).json({ error: "Student field is required" });
+    }
+
+    Student.findOne({ _id: req.body.student })
+      .then(() => {
+        ClassSection.findOne({ _id: req.params.id }).then(classsection => {
+          const filtered = classsection.students.filter(
+            student => student.student == req.body.student
+          );
+
+          if (filtered.length > 0) {
+            return res.status(400).json({
+              error: "The student is already registered in the current class"
+            });
+          } else {
+            const newStu = {
+              student: req.body.student
+            };
+            classsection.students.unshift(newStu);
+            classsection.save().then(classsection => res.json(classsection));
+          }
+        });
+      })
+      .catch(() => {
+        return res.status(400).json({ classsection: "Student id not found" });
+      });
   }
 );
 
@@ -197,49 +240,6 @@ router.get(
       })
       .catch(() => {
         res.json({ error: "Class section id not found" });
-      });
-  }
-);
-
-//@route    POST /api/classsections/register/:id
-//@desc     Register new student in classsection
-//@access   public
-router.put(
-  "/register/:id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    if (req.user.usertype === "teacher") {
-      return res
-        .status(400)
-        .json({ error: "You are Unauthorized to Register new section" });
-    }
-
-    if (!req.body.student) {
-      return res.status(400).json({ error: "Student field is required" });
-    }
-
-    Student.findOne({ _id: req.body.student })
-      .then(() => {
-        ClassSection.findOne({ _id: req.params.id }).then(classsection => {
-          const filtered = classsection.students.filter(
-            student => student.student == req.body.student
-          );
-
-          if (filtered.length > 0) {
-            return res.status(400).json({
-              error: "The student is already registered in the current class"
-            });
-          } else {
-            const newStu = {
-              student: req.body.student
-            };
-            classsection.students.unshift(newStu);
-            classsection.save().then(classsection => res.json(classsection));
-          }
-        });
-      })
-      .catch(() => {
-        return res.status(400).json({ classsection: "Student id not found" });
       });
   }
 );
