@@ -34,11 +34,11 @@ module.exports = function validateInput(data) {
   }
 
   if (!Validator.isLength(data.guardianname, { min: 5, max: 30 })) {
-    errors.guardianname = "Last name must be between 5 and 30 characters";
+    errors.guardianname = "Guardian name must be between 5 and 30 characters";
   }
 
   if (Validator.isEmpty(data.guardianname)) {
-    errors.guardianname = "Last name field is required";
+    errors.guardianname = "Guardian name field is required";
   }
 
   return {

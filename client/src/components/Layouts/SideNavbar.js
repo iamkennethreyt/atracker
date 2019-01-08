@@ -11,7 +11,7 @@ class Navbar extends Component {
         <Link to="/teachers" className="list-group-item">
           Teacher Management
         </Link>
-        <Link to="students" className="list-group-item">
+        <Link to="/students" className="list-group-item">
           Student Management
         </Link>
         <Link to="/sections" className="list-group-item">

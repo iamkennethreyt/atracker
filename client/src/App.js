@@ -12,6 +12,10 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import AboutPage from "./components/AboutPage/AboutPage";
 import TeachersPage from "./components/TeachersPage/TeachersPage";
 import AddTeachersPage from "./components/TeachersPage/AddTeachersPage";
+import EditTeachersPage from "./components/TeachersPage/EditTeachersPage";
+import StudentsPage from "./components/StudentPage/StudentsPage";
+import AddStudentsPage from "./components/StudentPage/AddStudentsPage";
+import EditStudentsPage from "./components/StudentPage/EditStudentsPage";
 
 //check for token
 if (localStorage.jwtToken) {
@@ -46,6 +50,19 @@ class App extends Component {
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/teachers" component={TeachersPage} />
             <Route exact path="/teachers/add" component={AddTeachersPage} />
+            <Route
+              exact
+              path="/teachers/edit/:id"
+              component={EditTeachersPage}
+            />
+
+            <Route exact path="/students" component={StudentsPage} />
+            <Route exact path="/students/add" component={AddStudentsPage} />
+            <Route
+              exact
+              path="/students/edit/:id"
+              component={EditStudentsPage}
+            />
           </div>
         </Router>
       </Provider>

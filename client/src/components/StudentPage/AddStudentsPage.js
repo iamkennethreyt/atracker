@@ -5,14 +5,16 @@ import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import classnames from "classnames";
-import { registerTeacher } from "../../actions/teacherActions";
+import { registerStudent } from "../../actions/studentActions";
 
-class AddTeachersPage extends Component {
+class AddStudentsPage extends Component {
   state = {
-    teacherid: "",
+    studentid: "",
     firstname: "",
     lastname: "",
     middlename: "",
+    guardianname: "",
+    contactnumber: "",
     errors: {}
   };
 
@@ -35,14 +37,16 @@ class AddTeachersPage extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newTeacher = {
+    const newStudent = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       middlename: this.state.middlename,
-      teacherid: this.state.teacherid
+      contactnumber: this.state.contactnumber,
+      guardianname: this.state.guardianname,
+      studentid: this.state.studentid
     };
 
-    this.props.registerTeacher(newTeacher, this.props.history);
+    this.props.registerStudent(newStudent, this.props.history);
   };
 
   render() {
@@ -58,7 +62,7 @@ class AddTeachersPage extends Component {
             <div className="col-md-9">
               <div className="container">
                 <div className="d-flex justify-content-between">
-                  <h1>Register New Teacher</h1>
+                  <h1>Register New Student</h1>
                 </div>
                 <form
                   className="border border-light p-5"
@@ -67,15 +71,15 @@ class AddTeachersPage extends Component {
                   <input
                     type="text"
                     className={classnames("form-control mt-2", {
-                      "is-invalid": errors.teacherid
+                      "is-invalid": errors.studentid
                     })}
-                    placeholder="Teacher ID"
-                    name="teacherid"
-                    value={this.state.teacherid}
+                    placeholder="Student ID"
+                    name="studentid"
+                    value={this.state.studentid}
                     onChange={this.onChange}
                   />
-                  {errors.teacherid && (
-                    <div className="invalid-feedback">{errors.teacherid}</div>
+                  {errors.studentid && (
+                    <div className="invalid-feedback">{errors.studentid}</div>
                   )}
 
                   <input
@@ -120,6 +124,38 @@ class AddTeachersPage extends Component {
                     <div className="invalid-feedback">{errors.lastname}</div>
                   )}
 
+                  <input
+                    type="text"
+                    className={classnames("form-control mt-2", {
+                      "is-invalid": errors.guardianname
+                    })}
+                    placeholder="Guardian name"
+                    name="guardianname"
+                    value={this.state.guardianname}
+                    onChange={this.onChange}
+                  />
+                  {errors.guardianname && (
+                    <div className="invalid-feedback">
+                      {errors.guardianname}
+                    </div>
+                  )}
+
+                  <input
+                    type="text"
+                    className={classnames("form-control mt-2", {
+                      "is-invalid": errors.contactnumber
+                    })}
+                    placeholder="Contact Number"
+                    name="contactnumber"
+                    value={this.state.contactnumber}
+                    onChange={this.onChange}
+                  />
+                  {errors.contactnumber && (
+                    <div className="invalid-feedback">
+                      {errors.contactnumber}
+                    </div>
+                  )}
+
                   <button
                     className="btn red accent-4 btn-block mt-4"
                     type="submit"
@@ -127,7 +163,7 @@ class AddTeachersPage extends Component {
                     Save
                   </button>
                   <Link
-                    to="/teachers"
+                    to="/students"
                     className="btn btn-outline-danger btn-block mt-2"
                   >
                     Cancel
@@ -142,9 +178,9 @@ class AddTeachersPage extends Component {
   }
 }
 
-AddTeachersPage.propTypes = {
+AddStudentsPage.propTypes = {
   auth: PropTypes.object.isRequired,
-  registerTeacher: PropTypes.func.isRequired,
+  registerStudent: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired
 };
 
@@ -155,5 +191,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { registerTeacher }
-)(AddTeachersPage);
+  { registerStudent }
+)(AddStudentsPage);

@@ -5,14 +5,16 @@ import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import classnames from "classnames";
-import { registerTeacher } from "../../actions/teacherActions";
+import { getStudent, updateStudent } from "../../actions/studentActions";
 
-class AddTeachersPage extends Component {
+class EditStudentPage extends Component {
   state = {
-    teacherid: "",
+    studentid: "",
     firstname: "",
     lastname: "",
     middlename: "",
+    contactnumber: "",
+    guardianname: "",
     errors: {}
   };
 
@@ -20,11 +22,30 @@ class AddTeachersPage extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
+
+    this.props.getStudent(this.props.match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+    }
+
+    if (nextProps.students.student) {
+      const {
+        firstname,
+        lastname,
+        middlename,
+        guardianname,
+        contactnumber
+      } = nextProps.students.student;
+      this.setState({
+        firstname,
+        lastname,
+        middlename,
+        contactnumber,
+        guardianname
+      });
     }
   }
 
@@ -35,14 +56,17 @@ class AddTeachersPage extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newTeacher = {
+    const updatedStudent = {
+      id: this.props.match.params.id,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       middlename: this.state.middlename,
-      teacherid: this.state.teacherid
+      teacherid: this.state.teacherid,
+      contactnumber: this.state.contactnumber,
+      guardianname: this.state.guardianname
     };
 
-    this.props.registerTeacher(newTeacher, this.props.history);
+    this.props.updateStudent(updatedStudent, this.props.history);
   };
 
   render() {
@@ -58,7 +82,7 @@ class AddTeachersPage extends Component {
             <div className="col-md-9">
               <div className="container">
                 <div className="d-flex justify-content-between">
-                  <h1>Register New Teacher</h1>
+                  <h1>Edit Teacher</h1>
                 </div>
                 <form
                   className="border border-light p-5"
@@ -66,21 +90,7 @@ class AddTeachersPage extends Component {
                 >
                   <input
                     type="text"
-                    className={classnames("form-control mt-2", {
-                      "is-invalid": errors.teacherid
-                    })}
-                    placeholder="Teacher ID"
-                    name="teacherid"
-                    value={this.state.teacherid}
-                    onChange={this.onChange}
-                  />
-                  {errors.teacherid && (
-                    <div className="invalid-feedback">{errors.teacherid}</div>
-                  )}
-
-                  <input
-                    type="text"
-                    className={classnames("form-control mt-2", {
+                    className={classnames("form-control mt-4", {
                       "is-invalid": errors.firstname
                     })}
                     placeholder="First Name"
@@ -94,7 +104,7 @@ class AddTeachersPage extends Component {
 
                   <input
                     type="text"
-                    className={classnames("form-control mt-2", {
+                    className={classnames("form-control mt-4", {
                       "is-invalid": errors.middlename
                     })}
                     placeholder="Middle name"
@@ -108,7 +118,7 @@ class AddTeachersPage extends Component {
 
                   <input
                     type="text"
-                    className={classnames("form-control mt-2", {
+                    className={classnames("form-control mt-4", {
                       "is-invalid": errors.lastname
                     })}
                     placeholder="Last name"
@@ -118,6 +128,38 @@ class AddTeachersPage extends Component {
                   />
                   {errors.lastname && (
                     <div className="invalid-feedback">{errors.lastname}</div>
+                  )}
+
+                  <input
+                    type="text"
+                    className={classnames("form-control mt-4", {
+                      "is-invalid": errors.guardianname
+                    })}
+                    placeholder="Guardian Name"
+                    name="guardianname"
+                    value={this.state.guardianname}
+                    onChange={this.onChange}
+                  />
+                  {errors.guardianname && (
+                    <div className="invalid-feedback">
+                      {errors.guardianname}
+                    </div>
+                  )}
+
+                  <input
+                    type="text"
+                    className={classnames("form-control mt-4", {
+                      "is-invalid": errors.contactnumber
+                    })}
+                    placeholder="Contact Number"
+                    name="contactnumber"
+                    value={this.state.contactnumber}
+                    onChange={this.onChange}
+                  />
+                  {errors.contactnumber && (
+                    <div className="invalid-feedback">
+                      {errors.contactnumber}
+                    </div>
                   )}
 
                   <button
@@ -142,18 +184,21 @@ class AddTeachersPage extends Component {
   }
 }
 
-AddTeachersPage.propTypes = {
+EditStudentPage.propTypes = {
   auth: PropTypes.object.isRequired,
-  registerTeacher: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  getStudent: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  students: PropTypes.object.isRequired,
+  updateStudent: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  students: state.students,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { registerTeacher }
-)(AddTeachersPage);
+  { getStudent, updateStudent }
+)(EditStudentPage);

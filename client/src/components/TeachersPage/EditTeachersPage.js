@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import classnames from "classnames";
-import { registerTeacher } from "../../actions/teacherActions";
+import { getTeacher, updateTeacher } from "../../actions/teacherActions";
 
-class AddTeachersPage extends Component {
+class EditTeachersPage extends Component {
   state = {
     teacherid: "",
     firstname: "",
@@ -20,11 +20,22 @@ class AddTeachersPage extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
+
+    this.props.getTeacher(this.props.match.params.id);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+    }
+
+    if (nextProps.teachers.teacher) {
+      const { firstname, lastname, middlename } = nextProps.teachers.teacher;
+      this.setState({
+        firstname,
+        lastname,
+        middlename
+      });
     }
   }
 
@@ -35,14 +46,15 @@ class AddTeachersPage extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const newTeacher = {
+    const updatedTeacher = {
+      id: this.props.match.params.id,
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       middlename: this.state.middlename,
       teacherid: this.state.teacherid
     };
 
-    this.props.registerTeacher(newTeacher, this.props.history);
+    this.props.updateTeacher(updatedTeacher, this.props.history);
   };
 
   render() {
@@ -58,7 +70,7 @@ class AddTeachersPage extends Component {
             <div className="col-md-9">
               <div className="container">
                 <div className="d-flex justify-content-between">
-                  <h1>Register New Teacher</h1>
+                  <h1>Edit Teacher</h1>
                 </div>
                 <form
                   className="border border-light p-5"
@@ -66,21 +78,7 @@ class AddTeachersPage extends Component {
                 >
                   <input
                     type="text"
-                    className={classnames("form-control mt-2", {
-                      "is-invalid": errors.teacherid
-                    })}
-                    placeholder="Teacher ID"
-                    name="teacherid"
-                    value={this.state.teacherid}
-                    onChange={this.onChange}
-                  />
-                  {errors.teacherid && (
-                    <div className="invalid-feedback">{errors.teacherid}</div>
-                  )}
-
-                  <input
-                    type="text"
-                    className={classnames("form-control mt-2", {
+                    className={classnames("form-control mt-4", {
                       "is-invalid": errors.firstname
                     })}
                     placeholder="First Name"
@@ -94,7 +92,7 @@ class AddTeachersPage extends Component {
 
                   <input
                     type="text"
-                    className={classnames("form-control mt-2", {
+                    className={classnames("form-control mt-4", {
                       "is-invalid": errors.middlename
                     })}
                     placeholder="Middle name"
@@ -108,7 +106,7 @@ class AddTeachersPage extends Component {
 
                   <input
                     type="text"
-                    className={classnames("form-control mt-2", {
+                    className={classnames("form-control mt-4", {
                       "is-invalid": errors.lastname
                     })}
                     placeholder="Last name"
@@ -142,18 +140,21 @@ class AddTeachersPage extends Component {
   }
 }
 
-AddTeachersPage.propTypes = {
+EditTeachersPage.propTypes = {
   auth: PropTypes.object.isRequired,
-  registerTeacher: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  getTeacher: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  teachers: PropTypes.object.isRequired,
+  updateTeacher: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  teachers: state.teachers,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { registerTeacher }
-)(AddTeachersPage);
+  { getTeacher, updateTeacher }
+)(EditTeachersPage);

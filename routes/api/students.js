@@ -30,7 +30,7 @@ router.post(
     }
 
     Student.findOne({ studentid: req.body.studentid }).then(student => {
-      errors.teachearid = "Student ID is already exists";
+      errors.studentid = "Student ID is already exists";
       if (student) {
         return res.status(400).json(errors);
       } else {

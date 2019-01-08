@@ -93,6 +93,7 @@ router.post(
           teacherid: req.body.teacherid,
           firstname: req.body.firstname,
           lastname: req.body.lastname,
+          middlename: req.body.middlename,
           usertype: "teacher",
           password: req.body.teacherid
         });
@@ -223,6 +224,7 @@ router.put(
       if (req.body.firstname) profileFields.firstname = req.body.firstname;
       if (req.body.lastname) profileFields.lastname = req.body.lastname;
       if (req.body.status) profileFields.status = req.body.status;
+      if (req.body.middlename) profileFields.middlename = req.body.middlename;
 
       Teacher.findByIdAndUpdate(
         { _id: req.params.id },

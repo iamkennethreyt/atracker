@@ -1,22 +1,22 @@
-import { GET_TEACHERS, GET_TEACHER } from "../actions/types";
+import { GET_STUDENTS, GET_STUDENT } from "../actions/types";
 
 const initialState = {
-  teachers: [],
-  teacher: {}
+  students: [],
+  student: {}
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case GET_TEACHERS:
+    case GET_STUDENTS:
       return {
         ...state,
-        teachers: action.payload,
+        students: action.payload,
         loading: false
       };
-    case GET_TEACHER:
+    case GET_STUDENT:
       return {
         ...state,
-        teacher: action.payload,
+        student: action.payload,
         loading: false
       };
     default:

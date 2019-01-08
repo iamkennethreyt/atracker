@@ -1,44 +1,14 @@
 import axios from "axios";
 
-import { GET_TEACHERS, GET_ERRORS, GET_TEACHER } from "./types";
+import { GET_STUDENTS, GET_ERRORS, GET_STUDENT } from "./types";
 
 // Get Posts
-export const getTeachers = () => dispatch => {
+export const getStudents = () => dispatch => {
   axios
-    .get("/api/teachers")
+    .get("/api/students")
     .then(res => {
       dispatch({
-        type: GET_TEACHERS,
-        payload: res.data
-      });
-    })
-    .catch(err =>
-      dispatch({
-        type: GET_TEACHERS,
-        payload: null
-      })
-    );
-};
-
-export const registerTeacher = (userdata, history) => dispatch => {
-  axios
-    .post("/api/teachers", userdata)
-    .then(res => history.push("/teachers"))
-    .catch(err =>
-      dispatch({
-        type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-};
-
-// Get Posts
-export const getTeacher = id => dispatch => {
-  axios
-    .get(`/api/teachers/${id}`)
-    .then(res => {
-      dispatch({
-        type: GET_TEACHER,
+        type: GET_STUDENTS,
         payload: res.data
       });
     })
@@ -50,13 +20,43 @@ export const getTeacher = id => dispatch => {
     );
 };
 
+export const registerStudent = (userdata, history) => dispatch => {
+  axios
+    .post("/api/students", userdata)
+    .then(res => history.push("/students"))
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
 // Get Posts
-export const updateTeacher = (data, history) => dispatch => {
+export const getStudent = id => dispatch => {
+  axios
+    .get(`/api/students/${id}`)
+    .then(res => {
+      dispatch({
+        type: GET_STUDENT,
+        payload: res.data
+      });
+    })
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Get Posts
+export const updateStudent = (data, history) => dispatch => {
   const { id } = data;
   axios
-    .put(`/api/teachers/${id}`, data)
+    .put(`/api/students/${id}`, data)
     .then(res => {
-      history.push("/teachers");
+      history.push("/students");
     })
     .catch(err =>
       dispatch({

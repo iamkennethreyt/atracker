@@ -4,15 +4,17 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
-import { getTeachers } from "../../actions/teacherActions";
+import { getStudents } from "../../actions/studentActions";
 
-class TeachersPage extends Component {
+class StudentsPage extends Component {
   state = {
-    teachers: [
+    students: [
       {
-        teacherid: "",
+        studentid: "",
         firstname: "",
-        lastname: ""
+        lastname: "",
+        guardianname: "",
+        contactnumber: ""
       }
     ]
   };
@@ -21,11 +23,11 @@ class TeachersPage extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
-    this.props.getTeachers();
+    this.props.getStudents();
   }
 
   componentWillReceiveProps(prop) {
-    this.setState({ teachers: prop.teachers });
+    this.setState({ students: prop.students });
   }
 
   render() {
@@ -40,9 +42,9 @@ class TeachersPage extends Component {
             <div className="col-md-9">
               <div className="container">
                 <div className="d-flex justify-content-between">
-                  <h1>Teacher Management</h1>
+                  <h1>Student Management</h1>
                   <Link
-                    to="teachers/add"
+                    to="/students/add"
                     className="btn btn-outline-danger waves-effect"
                   >
                     Add
@@ -53,22 +55,26 @@ class TeachersPage extends Component {
                   <thead className="red accent-4 white-text">
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Teacher ID</th>
+                      <th scope="col">Student ID</th>
                       <th scope="col">Name</th>
+                      <th scope="col">Guardian</th>
+                      <th scope="col">Contact Number</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.teachers.map((teacher, id) => {
+                    {this.state.students.map((student, id) => {
                       return (
                         <tr key={id}>
                           <th scope="row">{id + 1}</th>
-                          <td>{teacher.teacherid}</td>
-                          <td>{teacher.firstname + " " + teacher.lastname}</td>
+                          <td>{student.studentid}</td>
+                          <td>{student.firstname + " " + student.lastname}</td>
+                          <td>{student.guardianname}</td>
+                          <td>{student.contactnumber}</td>
                           <td>
                             <Link
                               className="btn btn-sm btn-outline-danger"
-                              to={`/teachers/edit/${teacher._id}`}
+                              to={`/students/edit/${student._id}`}
                             >
                               Edit
                             </Link>
@@ -87,18 +93,18 @@ class TeachersPage extends Component {
   }
 }
 
-TeachersPage.propTypes = {
+StudentsPage.propTypes = {
   auth: PropTypes.object.isRequired,
-  getTeachers: PropTypes.func.isRequired,
+  getStudents: PropTypes.func.isRequired,
   teachers: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  teachers: state.teachers.teachers
+  students: state.students.students
 });
 
 export default connect(
   mapStateToProps,
-  { getTeachers }
-)(TeachersPage);
+  { getStudents }
+)(StudentsPage);
