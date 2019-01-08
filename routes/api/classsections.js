@@ -1,11 +1,10 @@
 const express = require("express");
 const passport = require("passport");
-
+const _ = require("lodash");
 const router = express.Router();
 
 //load validation
 const validateInput = require("../../validations/classsections/input");
-const validateRegisterInput = require("../../validations/classsections/registerstudent");
 //load User model
 const ClassSection = require("../../models/ClassSection");
 const Section = require("../../models/Section");
@@ -116,6 +115,92 @@ router.get(
   }
 );
 
+//@route    PUT /api/classsections/attendance/:classid/:studentid
+//@desc     Check Attendance of the student
+//@access   public
+router.put(
+  "/attendance/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    if (!req.body.student) {
+      return res.status(400).json({ error: "Student field is required" });
+    }
+
+    if (!req.body.date) {
+      return res.status(400).json({ error: "Date field is required" });
+    }
+
+    ClassSection.findOne({ _id: req.params.id })
+      .then(classsection => {
+        const filterstudent = classsection.students.filter(
+          students => students.student == req.body.student
+        );
+
+        if (filterstudent == 0) {
+          return res.json({ error: "Student id not found" });
+        } else {
+          const filteredstudent = _.find(
+            classsection.students,
+            student => student.student._id == req.body.student
+          );
+
+          const filteredsattendance = filteredstudent.attendances.filter(
+            att => att.date == req.body.date
+          );
+
+          if (filteredsattendance.length > 0) {
+            res
+              .status(400)
+              .json({ error: "this student is homanag attendance" });
+          } else {
+            filteredstudent.attendances.unshift({ date: req.body.date });
+            classsection
+              .save()
+              .then(success => res.json(success))
+              .catch(err => res.status(400).json(err));
+          }
+        }
+      })
+      .catch(err => {
+        if (err) throw err;
+        res.json({ error: "Class section id not found" });
+      });
+  }
+);
+
+//@route    GET /api/classsections/attendance/:classid/:studentid
+//@desc     Return attendance of the student
+//@access   public
+router.get(
+  "/attendance/:classid/:studentid",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    ClassSection.findOne({ _id: req.params.classid })
+      .then(classsection => {
+        const filterstudent = classsection.students.filter(
+          students => students.student == req.params.studentid
+        );
+        if (filterstudent == 0) {
+          return res.json({ error: "Student id not found" });
+        }
+
+        ClassSection.findOne({ _id: req.params.classid })
+          .populate("students.student")
+          .then(classsection => {
+            const filtered = _.find(
+              classsection.students,
+              student => student.student._id == req.params.studentid
+            );
+
+            res.json(filtered);
+          });
+      })
+      .catch(() => {
+        res.json({ error: "Class section id not found" });
+      });
+  }
+);
+
 //@route    POST /api/classsections/register/:id
 //@desc     Register new student in classsection
 //@access   public
@@ -129,51 +214,32 @@ router.put(
         .json({ error: "You are Unauthorized to Register new section" });
     }
 
+    if (!req.body.student) {
+      return res.status(400).json({ error: "Student field is required" });
+    }
+
     Student.findOne({ _id: req.body.student })
       .then(() => {
         ClassSection.findOne({ _id: req.params.id }).then(classsection => {
-          const newStu = {
-            student: req.body.student
-          };
-          classsection.students.unshift(newStu);
-          classsection.save().then(classsection => res.json(classsection));
+          const filtered = classsection.students.filter(
+            student => student.student == req.body.student
+          );
+
+          if (filtered.length > 0) {
+            return res.status(400).json({
+              error: "The student is already registered in the current class"
+            });
+          } else {
+            const newStu = {
+              student: req.body.student
+            };
+            classsection.students.unshift(newStu);
+            classsection.save().then(classsection => res.json(classsection));
+          }
         });
       })
       .catch(() => {
         return res.status(400).json({ classsection: "Student id not found" });
-      });
-  }
-);
-
-//@route    POST /api/classsections/attendance/:id
-//@desc     Register new student in classsection
-//@access   public
-router.put(
-  "/attendance/:id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    if (req.user.usertype === "teacher") {
-      return res
-        .status(400)
-        .json({ error: "You are Unauthorized to Register new section" });
-    }
-
-    Student.findOne({ _id: req.body.student })
-      .then(student => {
-        if (!student) {
-          return res.status(400).json({ classsection: "student id not found" });
-        }
-
-        ClassSection.findOne({ _id: req.params.id }).then(classsection => {
-          const newStu = {
-            student: req.body.student
-          };
-          classsection.students.unshift(newStu);
-          classsection.save().then(classsection => res.json(classsection));
-        });
-      })
-      .catch(() => {
-        return res.status(400).json({ classsection: "student id not found" });
       });
   }
 );

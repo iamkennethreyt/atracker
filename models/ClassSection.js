@@ -32,8 +32,8 @@ const ClassSectionSchema = new Schema({
       attendances: [
         {
           date: {
-            type: Date,
-            default: Date.now
+            type: String,
+            required: true
           }
         }
       ]
