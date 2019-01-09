@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const _ = require("lodash");
+const moment = require("moment");
 const router = express.Router();
 
 //load validation
@@ -179,11 +180,6 @@ router.put(
       return res.status(400).json(errors);
     }
 
-    if (!req.body.date) {
-      errors.date = "Date field is required";
-      return res.status(400).json(errors);
-    }
-
     ClassSection.findOne({ _id: req.params.id })
       .then(classsection => {
         const filterstudent = classsection.students.filter(
@@ -200,14 +196,16 @@ router.put(
           );
 
           const filteredsattendance = filteredstudent.attendances.filter(
-            att => att.date == req.body.date
+            att => att.date == moment().format("LL")
           );
 
           if (filteredsattendance.length > 0) {
             errors.exist = "This student is homanag attendance";
             return res.status(400).json(errors);
           } else {
-            filteredstudent.attendances.unshift({ date: req.body.date });
+            filteredstudent.attendances.unshift({
+              date: moment().format("LL")
+            });
             classsection
               .save()
               .then(success => res.json(success))
