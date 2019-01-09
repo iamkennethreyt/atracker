@@ -5,19 +5,19 @@ class Navbar extends Component {
   render() {
     return (
       <ul className="list-group">
-        <Link to="/" className="list-group-item">
+        <Link to="/" className="list-group-item text-muted">
           Home
         </Link>
-        <Link to="/teachers" className="list-group-item">
+        <Link to="/teachers" className="list-group-item text-muted">
           Teacher Management
         </Link>
-        <Link to="/students" className="list-group-item">
+        <Link to="/students" className="list-group-item text-muted">
           Student Management
         </Link>
-        <Link to="/sections" className="list-group-item">
+        <Link to="/sections" className="list-group-item text-muted">
           Section Management
         </Link>
-        <Link to="/about" className="list-group-item">
+        <Link to="/about" className="list-group-item text-muted">
           About
         </Link>
       </ul>

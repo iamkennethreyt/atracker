@@ -10,3 +10,6 @@ export const GET_STUDENTS = "GET_STUDENTS";
 export const GET_STUDENT = "GET_STUDENT";
 export const POST_STUDENT = "POST_STUDENT";
 export const PUT_STUDENT = "PUT_STUDENT";
+
+export const GET_SECTIONS = "GET_SECTIONS";
+export const DELETE_SECTION = "DELETE_SECTION";

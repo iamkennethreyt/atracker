@@ -4,17 +4,14 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
-import { getStudents } from "../../actions/studentActions";
+import { getSections, deleteSection } from "../../actions/sectionActions";
 
-class StudentsPage extends Component {
+class SectionsPage extends Component {
   state = {
-    students: [
+    sections: [
       {
-        studentid: "",
-        firstname: "",
-        lastname: "",
-        guardianname: "",
-        contactnumber: ""
+        name: "",
+        gradelevel: ""
       }
     ]
   };
@@ -23,12 +20,17 @@ class StudentsPage extends Component {
     if (!this.props.auth.isAuthenticated) {
       this.props.history.push("/login");
     }
-    this.props.getStudents();
+    this.props.getSections();
   }
 
   componentWillReceiveProps(prop) {
-    this.setState({ students: prop.students });
+    this.setState({ sections: prop.sections });
   }
+
+  onDelete = id => {
+    this.props.deleteSection(id);
+    // console.log(id);
+  };
 
   render() {
     return (
@@ -42,9 +44,9 @@ class StudentsPage extends Component {
             <div className="col-md-9">
               <div className="container">
                 <div className="d-flex justify-content-between">
-                  <h1>Student Management</h1>
+                  <h1>Section Management</h1>
                   <Link
-                    to="/students/add"
+                    to="/sections/add"
                     className="btn btn-outline-danger waves-effect"
                   >
                     Add
@@ -55,29 +57,25 @@ class StudentsPage extends Component {
                   <thead className="red accent-4 white-text">
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">Student ID</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Guardian</th>
-                      <th scope="col">Contact Number</th>
+                      <th scope="col">Section Name</th>
+                      <th scope="col">Year Level</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {this.state.students.map((student, id) => {
+                    {this.state.sections.map((section, id) => {
                       return (
                         <tr key={id}>
                           <th scope="row">{id + 1}</th>
-                          <td>{student.studentid}</td>
-                          <td>{student.firstname + " " + student.lastname}</td>
-                          <td>{student.guardianname}</td>
-                          <td>{student.contactnumber}</td>
+                          <td>{section.name}</td>
+                          <td>{section.yearlevel}</td>
                           <td>
-                            <Link
+                            <button
                               className="btn btn-sm btn-outline-danger"
-                              to={`/students/edit/${student._id}`}
+                              onClick={this.onDelete.bind(this, section._id)}
                             >
-                              Edit
-                            </Link>
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       );
@@ -93,18 +91,19 @@ class StudentsPage extends Component {
   }
 }
 
-StudentsPage.propTypes = {
+SectionsPage.propTypes = {
   auth: PropTypes.object.isRequired,
-  getStudents: PropTypes.func.isRequired,
-  students: PropTypes.array.isRequired
+  getSections: PropTypes.func.isRequired,
+  deleteSection: PropTypes.func.isRequired,
+  sections: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  students: state.students.students
+  sections: state.sections.sections
 });
 
 export default connect(
   mapStateToProps,
-  { getStudents }
-)(StudentsPage);
+  { getSections, deleteSection }
+)(SectionsPage);

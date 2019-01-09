@@ -31,7 +31,7 @@ router.post(
     }
 
     Section.findOne({ name: req.body.name }).then(section => {
-      errors.name = "Section ID is already exists";
+      errors.name = "Section name is already exists";
       if (section) {
         return res.status(400).json(errors);
       } else {
@@ -82,12 +82,8 @@ router.delete(
       return res.status(400).json(errors);
     }
 
-    Section.findByIdAndRemove({ _id: req.params.id }).then(rmv =>
-      res.json({
-        success: true,
-        message: `${rmv.name} has successfully removed`
-      })
-    );
+    Section.findOneAndDelete({ _id: req.params.id }).then(rmv => res.json(rmv));
+    // res.json({ id: req.params.id });
   }
 );
 
