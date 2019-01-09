@@ -230,6 +230,7 @@ router.get(
   "/attendance/:classid/:studentid",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const errors = {};
     ClassSection.findOne({ _id: req.params.classid })
       .then(classsection => {
         const filterstudent = classsection.students.filter(

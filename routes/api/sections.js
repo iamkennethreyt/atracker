@@ -77,7 +77,6 @@ router.delete(
     const errors = {};
 
     if (req.user.usertype === "teacher") {
-      const errors = {};
       errors.Unauthorized =
         "You are Unauthorized to modify the student profile";
       return res.status(400).json(errors);

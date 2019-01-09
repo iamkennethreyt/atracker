@@ -97,6 +97,7 @@ router.put(
   "/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const errors = {};
     const studentProfileFields = {};
     if (req.user.usertype === "admin") {
       if (req.body.firstname)
@@ -116,7 +117,6 @@ router.put(
         .then(profile => res.json(profile))
         .catch(err => res.status(400).json({ errors: err }));
     } else {
-      const errors = {};
       errors.Unauthorized =
         "You are Unauthorized to modify the student profile";
       return res.status(400).json(errors);
