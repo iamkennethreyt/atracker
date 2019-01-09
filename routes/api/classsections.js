@@ -120,6 +120,29 @@ router.get(
   }
 );
 
+//@route    GET api/classsections/teacher
+//@desc     Show the class section based of the current teacher user
+//@access   private
+router.patch(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    errors.noclasses = "There is no classes available for this params";
+    ClassSection.findOne({ teacher: req.user._id })
+      .populate("section")
+      .populate("students.student")
+      .then(student => {
+        if (!student) {
+          res.status(404).json(errors);
+        } else {
+          res.json(student);
+        }
+      })
+      .catch(err => res.status(404).json(errors));
+  }
+);
+
 //@route    POST /api/classsections/register/:id
 //@desc     Register new student in classsection
 //@access   public

@@ -20,8 +20,11 @@ const db = require("./config/key").mongoURI;
 
 //connect to mongo
 mongoose
-  .connect(db)
-  .then(() => console.log("successfully connected to the database"))
+  .connect(
+    db,
+    { useNewUrlParser: true }
+  )
+  .then(() => console.log("Successfully connected to the database"))
   .catch(err => console.log(err));
 
 //passport middleware
