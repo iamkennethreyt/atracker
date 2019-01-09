@@ -9,11 +9,11 @@ module.exports = function validateInput(data) {
   data.sy = !_.isEmpty(data.sy) ? data.sy : "";
 
   if (Validator.isEmpty(data.section)) {
-    errors.section = "Section field is required";
+    errors.section = "Section ID is required";
   }
 
   if (Validator.isEmpty(data.teacher)) {
-    errors.teacher = "Teacher field is required";
+    errors.teacher = "Teacher ID is required";
   }
 
   if (Validator.isEmpty(data.sy)) {

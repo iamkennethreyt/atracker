@@ -24,9 +24,8 @@ router.post(
     }
 
     if (req.user.usertype === "teacher") {
-      return res
-        .status(400)
-        .json({ Unauthorized: "You are Unauthorized to Register new student" });
+      errors.Unauthorized = "You are Unauthorized to Register new student";
+      return res.status(400).json(errors);
     }
 
     Student.findOne({ studentid: req.body.studentid }).then(student => {
@@ -57,16 +56,16 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
+    errors.noprofile = "There are no students";
     Student.find()
       .then(students => {
         if (!students) {
-          errors.noprofile = "There are no students";
           return res.status(404).json(errors);
         }
 
         res.json(students);
       })
-      .catch(err => res.status(404).json({ profile: "There are no students" }));
+      .catch(err => res.status(404).json(errors));
   }
 );
 
@@ -78,20 +77,16 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
+    errors.noprofile = "There is no profile for this student";
     Student.findOne({ _id: req.params.id })
       .then(student => {
         if (!student) {
-          errors.noprofile = "There is no profile for this student";
           res.status(404).json(errors);
         }
 
         res.json(student);
       })
-      .catch(err =>
-        res
-          .status(404)
-          .json({ profile: "There is no profile for this student" })
-      );
+      .catch(err => res.status(404).json(errors));
   }
 );
 
@@ -119,11 +114,12 @@ router.put(
         { new: true }
       )
         .then(profile => res.json(profile))
-        .catch(err => res.status(400).json({ error: err }));
+        .catch(err => res.status(400).json({ errors: err }));
     } else {
-      return res.status(400).json({
-        Unauthorized: "You are Unauthorized to modify the student profile"
-      });
+      const errors = {};
+      errors.Unauthorized =
+        "You are Unauthorized to modify the student profile";
+      return res.status(400).json(errors);
     }
   }
 );

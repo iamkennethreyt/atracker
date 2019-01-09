@@ -24,9 +24,10 @@ router.post(
     }
 
     if (req.user.usertype === "teacher") {
-      return res
-        .status(400)
-        .json({ Unauthorized: "You are Unauthorized to Register new section" });
+      const errors = {};
+      errors.Unauthorized =
+        "You are Unauthorized to modify the student profile";
+      return res.status(400).json(errors);
     }
 
     Section.findOne({ name: req.body.name }).then(section => {
@@ -53,16 +54,16 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
+    errors.noprofile = "There are no sections";
     Section.find()
       .then(sections => {
         if (!sections) {
-          errors.noprofile = "There are no sections";
           return res.status(404).json(errors);
         }
 
         res.json(sections);
       })
-      .catch(err => res.status(404).json({ profile: "There are no sections" }));
+      .catch(err => res.status(404).json(errors));
   }
 );
 
@@ -76,9 +77,10 @@ router.delete(
     const errors = {};
 
     if (req.user.usertype === "teacher") {
-      return res
-        .status(400)
-        .json({ Unauthorized: "You are Unauthorized to Register new section" });
+      const errors = {};
+      errors.Unauthorized =
+        "You are Unauthorized to modify the student profile";
+      return res.status(400).json(errors);
     }
 
     Section.findByIdAndRemove({ _id: req.params.id }).then(rmv =>

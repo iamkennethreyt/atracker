@@ -31,9 +31,9 @@ router.post("/login", (req, res) => {
 
   //Find User by Email
   Teacher.findOne({ teacherid }).then(teacher => {
-    //chech user
+    //check user
     if (!teacher) {
-      errors.username = "Teacher ID not found";
+      errors.teacherid = "Teacher ID not found";
       return res.status(404).json(errors);
     }
 
@@ -79,9 +79,10 @@ router.post(
     }
 
     if (req.user.usertype === "teacher") {
-      return res
-        .status(400)
-        .json({ Unauthorized: "You are Unauthorized to Register new teacher" });
+      const errors = {};
+      errors.Unauthorized =
+        "You are Unauthorized to modify the student profile";
+      return res.status(400).json(errors);
     }
 
     Teacher.findOne({ teacherid: req.body.teacherid }).then(teacher => {
@@ -174,16 +175,16 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
+    errors.noprofile = "There are no teachers";
     Teacher.find()
       .then(teachers => {
         if (!teachers) {
-          errors.noprofile = "There are no teachers";
           return res.status(404).json(errors);
         }
 
         res.json(teachers);
       })
-      .catch(err => res.status(404).json({ profile: "There are no teachers" }));
+      .catch(err => res.status(404).json(errors));
   }
 );
 
@@ -195,18 +196,16 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const errors = {};
+    errors.noprofile = "There is no profile for this user";
     Teacher.findOne({ _id: req.params.id })
       .then(teacher => {
         if (!teacher) {
-          errors.noprofile = "There is no profile for this user";
           res.status(404).json(errors);
         }
 
         res.json(teacher);
       })
-      .catch(err =>
-        res.status(404).json({ profile: "There is no profile for this user" })
-      );
+      .catch(err => res.status(404).json(errors));
   }
 );
 
@@ -234,9 +233,9 @@ router.put(
         .then(profile => res.json(profile))
         .catch(err => res.status(400).json({ error: err }));
     } else {
-      return res.status(400).json({
-        Unauthorized: "You are Unauthorized to modify the teacher profile"
-      });
+      errors.Unauthorized =
+        "You are Unauthorized to modify the teacher profile";
+      return res.status(400).json(errors);
     }
   }
 );
