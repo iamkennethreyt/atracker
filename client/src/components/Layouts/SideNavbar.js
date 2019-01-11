@@ -17,6 +17,9 @@ class Navbar extends Component {
         <Link to="/sections" className="list-group-item text-muted">
           Section Management
         </Link>
+        <Link to="/classsections" className="list-group-item text-muted">
+          Class Section Management
+        </Link>
         <Link to="/about" className="list-group-item text-muted">
           About
         </Link>

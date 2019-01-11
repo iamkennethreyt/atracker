@@ -18,6 +18,10 @@ import AddStudentsPage from "./components/StudentPage/AddStudentsPage";
 import EditStudentsPage from "./components/StudentPage/EditStudentsPage";
 import SectionsPage from "./components/SectionPage/SectionsPage";
 import AddSectionsPage from "./components/SectionPage/AddSectionsPage";
+import ClassSectionsPage from "./components/ClassSectionsPage/ClassSectionsPage";
+import AddClassSectionsPage from "./components/ClassSectionsPage/AddClassSectionsPage";
+import EditClassSectionsPage from "./components/ClassSectionsPage/EditClassSectionsPage";
+import AddStudentClassSectionPage from "./components/ClassSectionsPage/AddStudentClassSectionPage";
 
 //check for token
 if (localStorage.jwtToken) {
@@ -67,6 +71,23 @@ class App extends Component {
             />
             <Route exact path="/sections" component={SectionsPage} />
             <Route exact path="/sections/add" component={AddSectionsPage} />
+
+            <Route exact path="/classsections" component={ClassSectionsPage} />
+            <Route
+              exact
+              path="/classsections/add"
+              component={AddClassSectionsPage}
+            />
+            <Route
+              exact
+              path="/classsections/:id"
+              component={EditClassSectionsPage}
+            />
+            <Route
+              exact
+              path="/classsections/register/student/:id"
+              component={AddStudentClassSectionPage}
+            />
           </div>
         </Router>
       </Provider>

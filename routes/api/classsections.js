@@ -44,7 +44,7 @@ router.post(
               unique: `${req.body.sy + req.body.section}`
             })
               .then(student => {
-                errors.classsection =
+                errors.section =
                   "This section is already exist in the school year created";
                 if (student) {
                   return res.status(400).json(errors);
@@ -170,7 +170,7 @@ router.put(
           );
 
           if (filtered.length > 0) {
-            errors.isExist =
+            errors.student =
               "The student is already registered in the current class";
             return res.status(400).json(errors);
           } else {
