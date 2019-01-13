@@ -72,7 +72,7 @@ class SectionsPage extends Component {
                           <td>
                             <button
                               className="btn btn-sm btn-outline-danger"
-                              onClick={this.onDelete.bind(this, section._id)}
+                              // onClick={this.onDelete.bind(this, section._id)}
                             >
                               Delete
                             </button>

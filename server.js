@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+var cors = require("cors");
 
 //load APIs
 const teachers = require("./routes/api/teachers");
@@ -10,6 +11,8 @@ const sections = require("./routes/api/sections");
 const classsections = require("./routes/api/classsections");
 
 const app = express();
+
+app.use(cors());
 
 //body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

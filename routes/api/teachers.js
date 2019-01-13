@@ -15,6 +15,10 @@ const ValidateChangePasswordInput = require("../../validations/teachers/changepa
 //load User model
 const Teacher = require("../../models/Teacher");
 
+router.get("/test/sample", (req, res) => {
+  res.json({ hello: "successfully connected to database" });
+});
+
 //@route    POST api/users/login
 //@desc     login user and returns JWT web token
 //@access   public

@@ -4,6 +4,12 @@ const _ = require("lodash");
 const moment = require("moment");
 const router = express.Router();
 
+const Nexmo = require("nexmo");
+const nexmo = new Nexmo({
+  apiKey: "d467036f",
+  apiSecret: "xR9O4Lh1VdJtidnO"
+});
+
 //load validation
 const validateInput = require("../../validations/classsections/input");
 //load User model
@@ -120,6 +126,29 @@ router.get(
   }
 );
 
+//@route    GET api/classsections/teachers/current
+//@desc     Show single classsections based on the current teacher
+//@access   private
+router.get(
+  "/teachers/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const errors = {};
+    errors.noprofile = "There is no class for this params";
+    ClassSection.find({ teacher: req.user.id })
+      .populate("section")
+      .populate("students.student")
+      .then(student => {
+        if (!student) {
+          res.status(404).json(errors);
+        }
+
+        res.json(student);
+      })
+      .catch(err => res.status(404).json(errors));
+  }
+);
+
 //@route    GET api/classsections/teacher
 //@desc     Show the class section based of the current teacher user
 //@access   private
@@ -199,7 +228,7 @@ router.put(
   (req, res) => {
     const errors = {};
     if (!req.body.student) {
-      errors.student = "Student field is required";
+      errors.error = "Student field is required";
       return res.status(400).json(errors);
     }
 
@@ -210,7 +239,7 @@ router.put(
         );
 
         if (filterstudent == 0) {
-          errors.studentid = "This student was not register on this class";
+          errors.error = "This student was not register on this class";
           return res.status(400).json(errors);
         } else {
           const filteredstudent = _.find(
@@ -223,21 +252,29 @@ router.put(
           );
 
           if (filteredsattendance.length > 0) {
-            errors.exist = "This student is homanag attendance";
+            errors.error = "This student is homanag attendance";
             return res.status(400).json(errors);
           } else {
             filteredstudent.attendances.unshift({
               date: moment().format("LL")
             });
-            classsection
-              .save()
-              .then(success => res.json(success))
-              .catch(err => res.status(400).json(err));
+            Student.findOne({ studentid: req.body.student }).then(student => {
+              classsection
+                .save()
+                .then(() =>
+                  res.json({
+                    success: `You had successfully scanned ${
+                      student.firstname
+                    } ${student.lastname}`
+                  })
+                )
+                .catch(err => res.status(400).json(err));
+            });
           }
         }
       })
       .catch(err => {
-        errors.sectionid = "Class section id not found";
+        errors.error = "Class section id not found";
         if (err) throw err;
         res.json(errors);
       });
@@ -277,6 +314,43 @@ router.get(
         errors.classsectionid = "Class section id not found";
         return res.json(errors);
       });
+  }
+);
+
+//@route    GET /api/classsections/attendance/:classid/:studentid
+//@desc     Return attendance of the student
+//@access   public
+router.get(
+  "/sendsms/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Student.findOne({ _id: req.params.id }).then(student => {
+      // res.json(student);
+      let number = student.contactnumber;
+      number = number.slice(1);
+
+      const sms = `Dear ${student.guardianname},
+      Imong student nga si ${student.firstname}
+      wa na'y uso niya ang klasehay
+
+      pwede ka mo are office namo.
+      
+      Thank You
+
+      `;
+
+      if (!student.contactnumber) {
+        res
+          .status(400)
+          .json({ error: "This student does not have a phone number" });
+      } else {
+        nexmo.message.sendSms("SWU-PHINMA", `63${number}`, sms);
+
+        res.json({
+          success: `successfully send sms to mr/mrs ${student.guardianname}`
+        });
+      }
+    });
   }
 );
 
