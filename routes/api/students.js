@@ -103,6 +103,9 @@ router.put(
       if (req.body.firstname)
         studentProfileFields.firstname = req.body.firstname;
       if (req.body.lastname) studentProfileFields.lastname = req.body.lastname;
+      if (req.body.middlename)
+        studentProfileFields.middlename = req.body.middlename;
+
       if (req.body.status) studentProfileFields.status = req.body.status;
       if (req.body.guardianname)
         studentProfileFields.guardianname = req.body.guardianname;
