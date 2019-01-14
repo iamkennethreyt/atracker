@@ -78,7 +78,7 @@ class EditClassSections extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <div className="container">
+        <div className="container dark-grey-text">
           <div className="row">
             <div className="col-md-3">
               <SideNavbar />
@@ -88,7 +88,7 @@ class EditClassSections extends Component {
                 {this.state.section ? (
                   <div>
                     <div className="d-flex justify-content-between">
-                      <h1>Class Section</h1>
+                      <h1>View Class Section</h1>
                     </div>
                     <div className="d-flex justify-content-between">
                       <h5>
@@ -124,7 +124,6 @@ class EditClassSections extends Component {
                           <th scope="col">Name</th>
                           <th scope="col">Guardian</th>
                           <th scope="col">Contact Number</th>
-                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -140,14 +139,14 @@ class EditClassSections extends Component {
                               </td>
                               <td>{student.student.guardianname}</td>
                               <td>{student.student.contactnumber}</td>
-                              <td>
+                              {/* <td>
                                 <Link
                                   className="btn btn-sm btn-outline-danger"
                                   to={`/students/edit/${student._id}`}
                                 >
                                   Edit
                                 </Link>
-                              </td>
+                              </td> */}
                             </tr>
                           );
                         })}

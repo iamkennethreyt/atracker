@@ -49,7 +49,7 @@ class EditTeachersPage extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <div className="container">
+        <div className="container dark-grey-text">
           <div className="row">
             <div className="col-md-3">
               <SideNavbar />

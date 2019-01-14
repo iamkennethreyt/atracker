@@ -77,7 +77,7 @@ class EditStudentPage extends Component {
     return (
       <React.Fragment>
         <Navbar />
-        <div className="container">
+        <div className="container dark-grey-text">
           <div className="row">
             <div className="col-md-3">
               <SideNavbar />
@@ -85,7 +85,7 @@ class EditStudentPage extends Component {
             <div className="col-md-9">
               <div className="container">
                 <div className="d-flex justify-content-between">
-                  <h1>Edit Teacher</h1>
+                  <h1>Edit Student</h1>
                 </div>
                 <form
                   className="border border-light p-5"
@@ -172,7 +172,7 @@ class EditStudentPage extends Component {
                     Save
                   </button>
                   <Link
-                    to="/teachers"
+                    to="/students"
                     className="btn btn-outline-danger btn-block mt-2"
                   >
                     Cancel

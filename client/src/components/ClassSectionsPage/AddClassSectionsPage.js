@@ -73,6 +73,7 @@ class AddClassSectionsPage extends Component {
   };
 
   render() {
+    // console.log(this.state.teachers);
     const { errors } = this.state;
     return (
       <React.Fragment>
@@ -83,7 +84,7 @@ class AddClassSectionsPage extends Component {
               <SideNavbar />
             </div>
             <div className="col-md-9">
-              <div className="container">
+              <div className="container dark-grey-text">
                 <div className="d-flex justify-content-between">
                   <h1>Register New Class Section</h1>
                 </div>
@@ -196,7 +197,7 @@ AddClassSectionsPage.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
-  teachers: state.teachers,
+  teachers: state.teachers.teachers,
   sections: state.sections.sections
 });
 

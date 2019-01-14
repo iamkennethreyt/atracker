@@ -49,7 +49,7 @@ class LoginPage extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="row">
+      <div className="row dark-grey-text">
         <div className="col-md-4 m-auto">
           <form className="border border-light p-5" onSubmit={this.onSubmit}>
             <p className="h4 mb-4">Sign in</p>

@@ -43,7 +43,7 @@ class SectionsPage extends Component {
               <SideNavbar />
             </div>
             <div className="col-md-9">
-              <div className="container">
+              <div className="container dark-grey-text">
                 <div className="d-flex justify-content-between">
                   <h1>Section Management</h1>
                   <Link

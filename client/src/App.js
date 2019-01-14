@@ -81,7 +81,7 @@ class App extends Component {
             />
             <Route
               exact
-              path="/classsections/:id"
+              path="/classsections/edit/:id"
               component={EditClassSectionsPage}
             />
             <Route

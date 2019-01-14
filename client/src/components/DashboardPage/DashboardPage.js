@@ -41,12 +41,12 @@ class DashboardPage extends Component {
               <SideNavbar />
             </div>
             <div className="col-md-9">
-              <div className="container">
+              <div className="container dark-grey-text">
                 <section className="text-center my-5">
                   <h2 className="h1-responsive font-weight-bold my-5">
                     Welcome to aTracker
                   </h2>
-                  <p className="lead grey-text w-responsive mx-auto mb-5">
+                  <p className="lead w-responsive mx-auto mb-5">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                     do eiusmod tempor incididunt ut labore et dolore magna
                     aliqua. Ut enim ad minim veniam.
@@ -62,41 +62,26 @@ class DashboardPage extends Component {
                         {" "}
                         Registerd Students
                       </h5>
-                      <p className="grey-text mb-md-0 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Reprehenderit maiores aperiam minima assumenda
-                        deleniti hic.
-                      </p>
                     </div>
 
                     <div className="col-md-4">
-                      <i className="fas fa-chalkboard-teacher fa-3x cyan-text" />
+                      <i className="fas fa-chalkboard-teacher fa-3x red-text" />
                       <h2 className="font-weight-bold my-4">
                         {this.state.teachers - 1}
                       </h2>
                       <h5 className="font-weight-bold my-4">
                         Registerd Teachers
                       </h5>
-                      <p className="grey-text mb-md-0 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Reprehenderit maiores aperiam minima assumenda
-                        deleniti hic.
-                      </p>
                     </div>
 
                     <div className="col-md-4">
-                      <i className="fas fa-users fa-3x orange-text" />
+                      <i className="fas fa-users fa-3x red-text" />
                       <h2 className="font-weight-bold my-4">
                         {this.state.classsections}
                       </h2>
                       <h5 className="font-weight-bold my-4">
                         Class Sections Created
                       </h5>
-                      <p className="grey-text mb-0">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Reprehenderit maiores aperiam minima assumenda
-                        deleniti hic.
-                      </p>
                     </div>
                   </div>
                 </section>

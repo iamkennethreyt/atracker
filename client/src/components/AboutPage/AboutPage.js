@@ -22,7 +22,7 @@ class AboutPage extends Component {
               <SideNavbar />
             </div>
             <div className="col-md-9">
-              <div className="container">
+              <div className="container dark-grey-text">
                 <section className="team-section text-center my-5">
                   <h2 className="h1-responsive font-weight-bold my-5">
                     Our amazing team

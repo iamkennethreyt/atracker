@@ -27,7 +27,7 @@ class Navbar extends Component {
 
   render() {
     return (
-      <ul className="list-group">
+      <ul className="list-group dark-grey-text">
         <Link to="/" className="list-group-item text-muted">
           Home
         </Link>

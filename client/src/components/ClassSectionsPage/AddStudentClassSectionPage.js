@@ -119,7 +119,7 @@ class AddStudentClassSectionPage extends Component {
               <SideNavbar />
             </div>
             <div className="col-md-9">
-              <div className="container">
+              <div className="container dark-grey-text">
                 {this.state.section ? (
                   <div>
                     <div className="d-flex justify-content-between">
