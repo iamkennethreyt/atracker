@@ -57,7 +57,9 @@ export const registerStudent = (data, history) => dispatch => {
   console.log(data);
   axios
     .put(`/api/classsections/register/${link.id}`, { student })
-    .then(res => history.push(`/classsections/edit/${link.id}`))
+    .then(res => {
+      history.push(`/classsections/edit/${link.id}`);
+    })
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
