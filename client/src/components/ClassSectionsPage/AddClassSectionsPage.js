@@ -195,8 +195,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
   errors: state.errors,
   teachers: state.teachers,
-  sections: state.sections.sections,
-  teachers: state.teachers.teachers
+  sections: state.sections.sections
 });
 
 export default connect(

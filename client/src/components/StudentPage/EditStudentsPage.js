@@ -24,6 +24,8 @@ class EditStudentPage extends Component {
     }
 
     this.props.getStudent(this.props.match.params.id);
+
+    console.log(this.props.match);
   }
 
   componentWillReceiveProps(nextProps) {

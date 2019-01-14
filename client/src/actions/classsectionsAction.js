@@ -1,11 +1,6 @@
 import axios from "axios";
 
-import {
-  GET_CLASSSECTIONS,
-  GET_ERRORS,
-  GET_CLASSSECTION,
-  PUT_CLASSSECTIONS
-} from "./types";
+import { GET_CLASSSECTIONS, GET_ERRORS, GET_CLASSSECTION } from "./types";
 
 // Get Posts
 export const getClassSections = () => dispatch => {

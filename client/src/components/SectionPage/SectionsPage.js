@@ -59,7 +59,6 @@ class SectionsPage extends Component {
                       <th scope="col">#</th>
                       <th scope="col">Section Name</th>
                       <th scope="col">Year Level</th>
-                      <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -69,14 +68,6 @@ class SectionsPage extends Component {
                           <th scope="row">{id + 1}</th>
                           <td>{section.name}</td>
                           <td>{section.yearlevel}</td>
-                          <td>
-                            <button
-                              className="btn btn-sm btn-outline-danger"
-                              // onClick={this.onDelete.bind(this, section._id)}
-                            >
-                              Delete
-                            </button>
-                          </td>
                         </tr>
                       );
                     })}

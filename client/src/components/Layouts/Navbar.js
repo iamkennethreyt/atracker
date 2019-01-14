@@ -11,9 +11,7 @@ class Navbar extends Component {
   };
 
   componentWillReceiveProps(props) {
-    // console.log(props);
     if (!props.auth.isAuthenticated) {
-      //   this.props.history.push("/");
       window.location.href = "/login";
     }
   }
@@ -42,12 +40,7 @@ class Navbar extends Component {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <a href="/" className="nav-link">
-                  {user.firstname + " " + user.lastname + " |"}
-                </a>
-              </li>
-              <li className="nav-item">
-                <a href="/" onClick={this.onLogout} className="nav-link">
-                  Logout
+                  {user.firstname + " " + user.lastname}
                 </a>
               </li>
             </ul>

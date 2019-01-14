@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
-import classnames from "classnames";
 import { getClassSection } from "../../actions/classsectionsAction";
 import { getStudents } from "../../actions/studentActions";
 
@@ -75,7 +74,6 @@ class EditClassSections extends Component {
   }
 
   render() {
-    const { errors } = this.state;
     return (
       <React.Fragment>
         <Navbar />

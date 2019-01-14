@@ -22,6 +22,7 @@ import ClassSectionsPage from "./components/ClassSectionsPage/ClassSectionsPage"
 import AddClassSectionsPage from "./components/ClassSectionsPage/AddClassSectionsPage";
 import EditClassSectionsPage from "./components/ClassSectionsPage/EditClassSectionsPage";
 import AddStudentClassSectionPage from "./components/ClassSectionsPage/AddStudentClassSectionPage";
+import SettingsPage from "./components/SettingsPage/SettingsPage";
 
 //check for token
 if (localStorage.jwtToken) {
@@ -88,6 +89,7 @@ class App extends Component {
               path="/classsections/register/student/:id"
               component={AddStudentClassSectionPage}
             />
+            <Route exact path="/settings" component={SettingsPage} />
           </div>
         </Router>
       </Provider>
