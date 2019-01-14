@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
+import FooterPage from "../Layouts/FooterPage";
 import SideNavbar from "../Layouts/SideNavbar";
 import { getClassSections } from "../../actions/classsectionsAction";
 
@@ -95,6 +96,7 @@ class ClassSectionsPage extends Component {
             </div>
           </div>
         </div>
+        <FooterPage />
       </React.Fragment>
     );
   }

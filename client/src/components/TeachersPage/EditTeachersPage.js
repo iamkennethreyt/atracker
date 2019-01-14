@@ -6,6 +6,7 @@ import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import classnames from "classnames";
 import { getTeacher, updateTeacher } from "../../actions/teacherActions";
+import FooterPage from "../Layouts/FooterPage";
 
 class EditTeachersPage extends Component {
   state = {
@@ -135,6 +136,7 @@ class EditTeachersPage extends Component {
             </div>
           </div>
         </div>
+        <FooterPage />
       </React.Fragment>
     );
   }

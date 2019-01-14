@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import classnames from "classnames";
+import FooterPage from "../Layouts/FooterPage";
 import {
   getClassSection,
   registerStudent
@@ -195,6 +196,7 @@ class AddStudentClassSectionPage extends Component {
             </div>
           </div>
         </div>
+        <FooterPage />
       </React.Fragment>
     );
   }

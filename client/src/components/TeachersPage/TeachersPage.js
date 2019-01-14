@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import { getTeachers } from "../../actions/teacherActions";
+import FooterPage from "../Layouts/FooterPage";
 
 class TeachersPage extends Component {
   state = {
@@ -82,6 +83,7 @@ class TeachersPage extends Component {
             </div>
           </div>
         </div>
+        <FooterPage />
       </React.Fragment>
     );
   }

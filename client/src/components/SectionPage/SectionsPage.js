@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import { getSections, deleteSection } from "../../actions/sectionActions";
+import FooterPage from "../Layouts/FooterPage";
 
 class SectionsPage extends Component {
   state = {
@@ -77,6 +78,7 @@ class SectionsPage extends Component {
             </div>
           </div>
         </div>
+        <FooterPage />
       </React.Fragment>
     );
   }

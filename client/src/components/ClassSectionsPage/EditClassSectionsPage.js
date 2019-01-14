@@ -6,6 +6,7 @@ import Navbar from "../Layouts/Navbar";
 import SideNavbar from "../Layouts/SideNavbar";
 import { getClassSection } from "../../actions/classsectionsAction";
 import { getStudents } from "../../actions/studentActions";
+import FooterPage from "../Layouts/FooterPage";
 
 class EditClassSections extends Component {
   state = {
@@ -160,6 +161,7 @@ class EditClassSections extends Component {
             </div>
           </div>
         </div>
+        <FooterPage />
       </React.Fragment>
     );
   }

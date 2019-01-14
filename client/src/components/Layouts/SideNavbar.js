@@ -56,6 +56,7 @@ class Navbar extends Component {
         >
           Sign Out
         </li>
+        <div style={{ height: "140px" }} />
       </ul>
     );
   }

@@ -8,6 +8,7 @@ import classnames from "classnames";
 import { registerClassSection } from "../../actions/classsectionsAction";
 import { getSections } from "../../actions/sectionActions";
 import { getTeachers } from "../../actions/teacherActions";
+import FooterPage from "../Layouts/FooterPage";
 
 class AddClassSectionsPage extends Component {
   state = {
@@ -176,6 +177,7 @@ class AddClassSectionsPage extends Component {
             </div>
           </div>
         </div>
+        <FooterPage />
       </React.Fragment>
     );
   }
