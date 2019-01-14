@@ -1,6 +1,6 @@
-# LOGIN APPLICATOPN
+# aTRacker
 
-> Login application built with the [M](https://www.mongodb.com/)[E](https://expressjs.com/)[R](https://reactjs.org/)[N](https://nodejs.org/) stack along with Redux for state management
+> aTRacker application built with the [M](https://www.mongodb.com/)[E](https://expressjs.com/)[R](https://reactjs.org/)[N](https://nodejs.org/) stack along with Redux for state management
 
 ## Quick Start
 
@@ -25,7 +25,7 @@ npm run client
 
 ## App Info
 
-The application can only be register an account, login, and change the password
+The application allows to add a teacher user to have an account, also can add students, section and class section. aTRacker app has a mobile application link (https://github.com/iamkennethreyt/atracker-mobile) that allows to the registered user to scan the qr code of the student. Which they check their daily attendance
 
 ### Note
 
