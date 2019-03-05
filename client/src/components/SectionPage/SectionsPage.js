@@ -48,14 +48,14 @@ class SectionsPage extends Component {
                   <h1>Section Management</h1>
                   <Link
                     to="/sections/add"
-                    className="btn btn-outline-danger waves-effect"
+                    className="btn btn-outline-primary waves-effect"
                   >
                     Add
                   </Link>
                 </div>
 
                 <table className="table">
-                  <thead className="red accent-4 white-text">
+                  <thead className="blue darken-1 white-text">
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Section Name</th>

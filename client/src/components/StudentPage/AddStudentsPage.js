@@ -158,7 +158,7 @@ class AddStudentsPage extends Component {
                   )}
 
                   <button
-                    className="btn red accent-4 btn-block mt-4"
+                    className="btn blue darken-1 btn-block mt-4"
                     type="submit"
                   >
                     Save
