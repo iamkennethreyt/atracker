@@ -47,9 +47,7 @@ class DashboardPage extends Component {
                     Welcome to aTracker
                   </h2>
                   <p className="lead w-responsive mx-auto mb-5">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam.
+                    Experience a hassle-free way of checking attendance.
                   </p>
 
                   <div className="row">
