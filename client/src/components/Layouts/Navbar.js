@@ -19,7 +19,7 @@ class Navbar extends Component {
     const { user } = this.props.auth;
 
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark red accent-4 mb-3">
+      <nav className="navbar navbar-expand-lg navbar-dark blue darken-1 mb-3">
         <div className="container">
           <Link className="nav-brand text-white" to="/">
             aTracker

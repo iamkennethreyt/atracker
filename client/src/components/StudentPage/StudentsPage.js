@@ -46,14 +46,14 @@ class StudentsPage extends Component {
                   <h1>Student Management</h1>
                   <Link
                     to="/students/add"
-                    className="btn btn-outline-danger waves-effect"
+                    className="btn btn-outline-primary waves-effect"
                   >
                     Add
                   </Link>
                 </div>
 
                 <table className="table">
-                  <thead className="red accent-4 white-text">
+                  <thead className="blue darken-1 white-text">
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Student ID</th>
@@ -74,7 +74,7 @@ class StudentsPage extends Component {
                           <td>{student.contactnumber}</td>
                           <td>
                             <Link
-                              className="btn btn-sm btn-outline-danger"
+                              className="btn btn-sm btn-outline-primary"
                               to={`/students/edit/${student._id}`}
                             >
                               Edit

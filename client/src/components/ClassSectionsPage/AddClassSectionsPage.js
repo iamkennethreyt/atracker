@@ -162,14 +162,14 @@ class AddClassSectionsPage extends Component {
                   </div>
 
                   <button
-                    className="btn red accent-4 btn-block mt-4"
+                    className="btn blue darken-1 btn-block mt-4"
                     type="submit"
                   >
                     Save
                   </button>
                   <Link
                     to="/classsections"
-                    className="btn btn-outline-danger btn-block mt-2"
+                    className="btn btn-outline-primary btn-block mt-2"
                   >
                     Cancel
                   </Link>

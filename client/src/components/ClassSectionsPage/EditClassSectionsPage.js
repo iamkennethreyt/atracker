@@ -111,13 +111,13 @@ class EditClassSections extends Component {
                       to={`/classsections/register/student/${
                         this.props.match.params.id
                       }`}
-                      className="btn red accent-4  mt-4"
+                      className="btn blue darken-1  mt-4"
                     >
                       Add Student
                     </Link>
 
                     <table className="table">
-                      <thead className="red accent-4 white-text">
+                      <thead className="blue darken-1 white-text">
                         <tr>
                           <th scope="col">#</th>
                           <th scope="col">Student ID</th>

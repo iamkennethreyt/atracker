@@ -51,14 +51,14 @@ class ClassSectionsPage extends Component {
                   <h1>Class Section Management</h1>
                   <Link
                     to="/classsections/add"
-                    className="btn btn-outline-danger waves-effect"
+                    className="btn btn-outline-primary waves-effect"
                   >
                     Add
                   </Link>
                 </div>
 
                 <table className="table">
-                  <thead className="red accent-4 white-text">
+                  <thead className="blue darken-1 white-text">
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Class Sections</th>
@@ -82,7 +82,7 @@ class ClassSectionsPage extends Component {
                           <td>
                             <Link
                               to={`/classsections/edit/${cs._id}`}
-                              className="btn btn-sm btn-outline-danger"
+                              className="btn btn-sm btn-outline-primary"
                             >
                               View
                             </Link>

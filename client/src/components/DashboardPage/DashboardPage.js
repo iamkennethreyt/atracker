@@ -52,7 +52,7 @@ class DashboardPage extends Component {
 
                   <div className="row">
                     <div className="col-md-4">
-                      <i className="fas fa-address-card fa-3x red-text" />
+                      <i className="fas fa-address-card fa-3x blue-text" />
                       <h2 className="font-weight-bold my-4">
                         {this.state.students}
                       </h2>
@@ -63,7 +63,7 @@ class DashboardPage extends Component {
                     </div>
 
                     <div className="col-md-4">
-                      <i className="fas fa-chalkboard-teacher fa-3x red-text" />
+                      <i className="fas fa-chalkboard-teacher fa-3x blue-text" />
                       <h2 className="font-weight-bold my-4">
                         {this.state.teachers - 1}
                       </h2>
@@ -73,7 +73,7 @@ class DashboardPage extends Component {
                     </div>
 
                     <div className="col-md-4">
-                      <i className="fas fa-users fa-3x red-text" />
+                      <i className="fas fa-users fa-3x blue-text" />
                       <h2 className="font-weight-bold my-4">
                         {this.state.classsections}
                       </h2>
