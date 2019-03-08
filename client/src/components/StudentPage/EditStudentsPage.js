@@ -173,7 +173,7 @@ class EditStudentPage extends Component {
                   </button>
                   <Link
                     to="/students"
-                    className="btn btn-outline-danger btn-block mt-2"
+                    className="btn btn-outline-primary btn-block mt-2"
                   >
                     Cancel
                   </Link>
