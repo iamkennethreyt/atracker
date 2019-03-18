@@ -23,6 +23,10 @@ const StudentSchema = new Schema({
     type: String,
     required: true
   },
+  gender: {
+    type: String,
+    required: true
+  },
   contactnumber: {
     type: String
   },

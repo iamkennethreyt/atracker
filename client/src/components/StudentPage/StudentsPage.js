@@ -15,6 +15,7 @@ class StudentsPage extends Component {
         firstname: "",
         lastname: "",
         guardianname: "",
+        gender: "",
         contactnumber: ""
       }
     ]
@@ -59,6 +60,7 @@ class StudentsPage extends Component {
                       <th scope="col">Student ID</th>
                       <th scope="col">Name</th>
                       <th scope="col">Guardian</th>
+                      <th scope="col">Gender</th>
                       <th scope="col">Contact Number</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -70,6 +72,7 @@ class StudentsPage extends Component {
                           <th scope="row">{id + 1}</th>
                           <td>{student.studentid}</td>
                           <td>{student.firstname + " " + student.lastname}</td>
+                          <td>{student.gender}</td>
                           <td>{student.guardianname}</td>
                           <td>{student.contactnumber}</td>
                           <td>

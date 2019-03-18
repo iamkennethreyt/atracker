@@ -39,6 +39,7 @@ router.post(
           lastname: req.body.lastname,
           middlename: req.body.middlename,
           guardianname: req.body.guardianname,
+          gender: req.body.gender,
           contactnumber: req.body.contactnumber
         });
 
@@ -58,6 +59,7 @@ router.get(
     const errors = {};
     errors.noprofile = "There are no students";
     Student.find()
+      .sort({ gender: -1, lastname: -1 })
       .then(students => {
         if (!students) {
           return res.status(404).json(errors);
@@ -109,6 +111,7 @@ router.put(
       if (req.body.status) studentProfileFields.status = req.body.status;
       if (req.body.guardianname)
         studentProfileFields.guardianname = req.body.guardianname;
+      if (req.body.gender) studentProfileFields.gender = req.body.gender;
       if (req.body.contactnumber)
         studentProfileFields.contactnumber = req.body.contactnumber;
 

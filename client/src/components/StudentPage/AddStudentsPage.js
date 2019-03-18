@@ -16,6 +16,7 @@ class AddStudentsPage extends Component {
     middlename: "",
     guardianname: "",
     contactnumber: "",
+    gender: "",
     errors: {}
   };
 
@@ -44,6 +45,7 @@ class AddStudentsPage extends Component {
       middlename: this.state.middlename,
       contactnumber: this.state.contactnumber,
       guardianname: this.state.guardianname,
+      gender: this.state.gender,
       studentid: this.state.studentid
     };
 
@@ -51,6 +53,15 @@ class AddStudentsPage extends Component {
   };
 
   render() {
+    const selectOptions = [
+      { value: "Male", label: "Male" },
+      { value: "Female", label: "Female" }
+    ].map(option => (
+      <option key={option.label} value={option.value}>
+        {option.label}
+      </option>
+    ));
+
     const { errors } = this.state;
     return (
       <React.Fragment>
@@ -123,6 +134,20 @@ class AddStudentsPage extends Component {
                   />
                   {errors.lastname && (
                     <div className="invalid-feedback">{errors.lastname}</div>
+                  )}
+
+                  <select
+                    className={classnames("form-control mt-2", {
+                      "is-invalid": errors.gender
+                    })}
+                    name="gender"
+                    value={this.state.gender}
+                    onChange={this.onChange}
+                  >
+                    {selectOptions}
+                  </select>
+                  {errors.gender && (
+                    <div className="invalid-feedback">{errors.gender}</div>
                   )}
 
                   <input

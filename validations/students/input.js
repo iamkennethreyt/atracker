@@ -8,6 +8,7 @@ module.exports = function validateInput(data) {
   data.firstname = !_.isEmpty(data.firstname) ? data.firstname : "";
   data.lastname = !_.isEmpty(data.lastname) ? data.lastname : "";
   data.guardianname = !_.isEmpty(data.guardianname) ? data.guardianname : "";
+  data.gender = !_.isEmpty(data.gender) ? data.gender : "";
 
   if (!Validator.isLength(data.studentid, { min: 5, max: 12 })) {
     errors.studentid = "Student ID must be between 5 and 12 characters";
@@ -15,6 +16,10 @@ module.exports = function validateInput(data) {
 
   if (Validator.isEmpty(data.studentid)) {
     errors.studentid = "Student ID field is required";
+  }
+
+  if (Validator.isEmpty(data.gender)) {
+    errors.gender = "Gender field is required";
   }
 
   if (!Validator.isLength(data.firstname, { min: 2, max: 30 })) {
